@@ -22,7 +22,7 @@ contract StarNotary is ERC721 {
 
         require(this.isStarInfoConformToRequirement(_ra, _dec, _mag), "Star doesn't conform to required format");
 
-        require(!this.isStarExist(_ra, _dec, _mag), "Star already exists");
+        require(!this.checkIfStarExist(_ra, _dec, _mag), "Star already exists");
 
         tokenIdToStarInfo[_tokenId] = newStar;
         starMap[keccak256(abi.encodePacked(_ra, _dec, _mag))] = true;
@@ -38,7 +38,7 @@ contract StarNotary is ERC721 {
         return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
     }
 
-    function isStarExist(string _ra, string _dec, string _mag) public view returns (bool) {
+    function checkIfStarExist(string _ra, string _dec, string _mag) public view returns (bool) {
         return starMap[keccak256(abi.encodePacked(_ra, _dec, _mag))] == true;
     }
 
@@ -63,5 +63,10 @@ contract StarNotary is ERC721 {
         if(msg.value > starCost) { 
             msg.sender.transfer(msg.value - starCost);
         }
+    }
+
+    //_mint is an internal function. In order to test mint, create a public mint here
+    function mint(address _to, uint256 _tokenId) public{
+        super._mint(_to, _tokenId);
     }
 }

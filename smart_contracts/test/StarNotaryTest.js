@@ -23,6 +23,10 @@ contract('StarNotary', accounts => {
             await this.contract.createStar(name, ra, dec, mag, story, starId, {from: user0})
             let star = await this.contract.tokenIdToStarInfo(starId);
             assert.equal(star[0].toString(), name)
+            assert.equal(star[1].toString(), ra)
+            assert.equal(star[2].toString(), dec)
+            assert.equal(star[3].toString(), mag)
+            assert.equal(star[4].toString(), story)
         })
     })
 
@@ -60,4 +64,46 @@ contract('StarNotary', accounts => {
             })
         })
     })
+
+    describe('test related ERC721 function', () => { 
+        it('test checkIfStarExist', async function () { 
+            await this.contract.createStar(name, ra, dec, mag, story, starId, {from: user0})
+            let isExist = await this.contract.checkIfStarExist(ra, dec, mag);
+            assert.equal(isExist, true);
+        })
+        it('test mint', async function () { 
+            await this.contract.mint(user1, starId);
+            let owner = await this.contract.ownerOf(starId);
+            assert.equal(owner, user1);
+        })
+        it('test approve and getApproved', async function () { 
+            await this.contract.createStar(name, ra, dec, mag, story, starId, {from: user1})
+            await this.contract.approve(user2, starId, {from: user1});
+            let approvedUser = await this.contract.getApproved(starId, {from: user1});
+            assert.equal(approvedUser, user2);
+        })
+        it('test safeTransferFrom', async function () { 
+            await this.contract.createStar(name, ra, dec, mag, story, starId, {from: user1})
+            await this.contract.safeTransferFrom(user1, user2, starId, {from: user1});
+            let newOwner = await this.contract.ownerOf(starId, {from: user1});
+            assert.equal(newOwner, user2);
+        })
+        it('test SetApprovalForAll and isApprovedForAll', async function () { 
+            await this.contract.createStar(name, ra, dec, mag, story, starId, {from: user1})
+            await this.contract.setApprovalForAll(user2, true, {from: user1});
+            let isValidOperator = await this.contract.isApprovedForAll(user1, user2, {from: user1});
+            assert.equal(isValidOperator, true);
+        })
+        it('test ownerOf', async function () { 
+            await this.contract.createStar(name, ra, dec, mag, story, starId, {from: user1})
+            let originOwner = await this.contract.ownerOf(starId, {from: user2});
+            assert.equal(originOwner, user1);
+            await this.contract.safeTransferFrom(user1, user2, starId, {from: user1});
+            let newOwner = await this.contract.ownerOf(starId, {from: user1});
+            assert.equal(newOwner, user2);
+        })
+ 
+
+    })
+    
 })

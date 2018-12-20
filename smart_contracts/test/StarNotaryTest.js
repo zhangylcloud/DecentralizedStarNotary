@@ -65,7 +65,7 @@ contract('StarNotary', accounts => {
         })
     })
 
-    describe('test related ERC721 function', () => { 
+    describe('test related ERC721 functions', () => { 
         it('test checkIfStarExist', async function () { 
             await this.contract.createStar(name, ra, dec, mag, story, starId, {from: user0})
             let isExist = await this.contract.checkIfStarExist(ra, dec, mag);

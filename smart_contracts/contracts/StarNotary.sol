@@ -20,7 +20,7 @@ contract StarNotary is ERC721 {
     function createStar(string _name, string _ra, string _dec, string _mag, string _story, uint256 _tokenId) public { 
         Star memory newStar = Star(_name, _ra, _dec, _mag, _story);
 
-        require(this.isStarInfoConformToRequirement(_ra, _dec, _mag), "Star doesn't conform to required format");
+        //require(this.isStarInfoConformToRequirement(_ra, _dec, _mag), "Star doesn't conform to required format");
 
         require(!this.checkIfStarExist(_ra, _dec, _mag), "Star already exists");
 
@@ -30,13 +30,13 @@ contract StarNotary is ERC721 {
         _mint(msg.sender, _tokenId);
     }
 
-    function isStarInfoConformToRequirement(string _ra, string _dec, string _mag) public view returns (bool){
-        return (!compareStrings(_ra, "") && !compareStrings(_dec, "") && !compareStrings(_mag, ""));
-    }
+    //function isStarInfoConformToRequirement(string _ra, string _dec, string _mag) public view returns (bool){
+    //    return (!compareStrings(_ra, "") && !compareStrings(_dec, "") && !compareStrings(_mag, ""));
+    //}
 
-    function compareStrings(string a, string b) public view returns (bool){
-        return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
-    }
+//    function compareStrings(string a, string b) public view returns (bool){
+//        return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
+//    }
 
     function checkIfStarExist(string _ra, string _dec, string _mag) public view returns (bool) {
         return starMap[keccak256(abi.encodePacked(_ra, _dec, _mag))] == true;

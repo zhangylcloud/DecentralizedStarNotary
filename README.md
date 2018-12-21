@@ -4,7 +4,7 @@
 ## Explaination based on project rubric
 
 ### Write a smart contract with functions
-All the required solidity code can be found in the contract folder
+All the required solidity code can be found in the contracts folder
 
 ### Test smart contract code coverage
 All the required test code can be found in the test folder, StarNotaryTest.js. In addition to the test code provided by the starter code, I added a test case for each ERC721 function

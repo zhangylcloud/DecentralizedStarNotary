@@ -1,12 +1,12 @@
-#Udacity Blockchain Project 5
-##Decentralized Star Notary on Rinkeby
+# Udacity Blockchain Project 5
+## Decentralized Star Notary on Rinkeby
 
-##Explaination based on project rubric
+## Explaination based on project rubric
 
-###Write a smart contract with functions
+### Write a smart contract with functions
 All the required solidity code can be found in the contract folder
 
-###Test smart contract code coverage
+### Test smart contract code coverage
 All the required test code can be found in the test folder, StarNotaryTest.js. In addition to the test code provided by the starter code, I added a test case for each ERC721 function
 
 Proof of successful test:
@@ -18,14 +18,14 @@ To run the test, please do the following:
 3. run ```ganache-cli``` on a terminal, so we have a private ethereum blockchain mock on our pc
 4. run ```truffle test``` inside smart_contracts folder
 
-###Deploy smart contract on a public test network (Rinkeby)
+### Deploy smart contract on a public test network (Rinkeby)
 Smart Contract Address: 0x258a5986cad866eccd053211c98357b358a07bd1
 Create Contract Txn: 0x639c56bab1544bd13fa533198ff1a80f16671222cb41f06c467b736bb6649f8b
 
 I've already created 5 stars. The first star creation (with tokenid 1) txn is 0x5390d23d633b1e2b7da86b35041ba55f0d7928b9977fc7b910f7384a3ecc8782
 And it is put for sale in txn 0xa251bb8548456423484b5da6a05ad41a4c27f15e98e54d81cd0acd6ace9a882f
 
-###Modify client code to interact with a smart contract
+### Modify client code to interact with a smart contract
 To run the front end UI, do the following:
 1. npm install -g http-server
 2. Go the the github repo root directory, run http-server .

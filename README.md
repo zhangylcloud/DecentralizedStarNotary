@@ -29,8 +29,8 @@ And it is put for sale in txn 0xa251bb8548456423484b5da6a05ad41a4c27f15e98e54d81
 
 ### Modify client code to interact with a smart contract
 To run the front end UI, do the following:
-1. npm install -g http-server
-2. Go the the github repo root directory, run http-server .
+1. ```npm install -g http-server```
+2. Go the the github repo root directory, run ```http-server .```
 3. Open browser, go to this url: http://127.0.0.1:8080/
 
 So you can create (lookup) stars from the UI.
